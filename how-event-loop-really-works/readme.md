@@ -1,6 +1,6 @@
 # How Node Event Loop REALLY Works: Or Why Most of the Event Loop Diagrams are WRONG
 
-When [Bert Belder](https://twitter.com/piscisaureus) (one of the early Node core contributors) presented his keynote at Node Interactive Europe 2016 on Event Loop, he started by saying that most of event loops diagrams are WRONG. I'm guilty of using one of them in my talks. :) This is it. In it, event loop is spinning data back at clients like hot-cakes.
+When [Bert Belder](https://twitter.com/piscisaureus) (one of the early Node core contributors) presented his keynote at [Node Interactive Europe 2016](http://webapplog.com/node-interactive-eu-2016) on Event Loop, he started by saying that most of event loops diagrams are WRONG. I'm guilty of using one of them in my talks. :) This is it. In it, event loop is spinning data back at clients like hot-cakes.
 
 ![title](images/non-blocking.png)
 
