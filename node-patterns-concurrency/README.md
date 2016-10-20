@@ -143,7 +143,7 @@ When all hell breaks lose, listen to `process.on('uncaughtException', callback)`
 
 ## `okay`
 
-There's also a nice little module (as they are should be in npm) which will do the repetitive work of checking for errors for you. To install it, simply run `npm i ok -S`.
+There's also a nice little module (as they are should be in npm) which will do the repetitive work of checking for errors for you. It's called [`okay`](https://www.npmjs.com/package/okay). To install it, simply run `npm i ok -S`.
 
 Then, use it like this in your callbacks (the code is from the above example):
 
