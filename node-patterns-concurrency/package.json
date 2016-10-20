@@ -1,0 +1,15 @@
+{
+  "name": "node-patterns-concurrency",
+  "version": "1.0.0",
+  "description": "Most of us learned programming in a synchronous manner and never bothered with asynchronous patterns. Well, you might start learning async now, because asynchronous code is more efficient than synchronous, but to write good async code you need to know at least a few Node patterns.",
+  "main": "async-throw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "okay": "^1.0.0"
+  }
+}
