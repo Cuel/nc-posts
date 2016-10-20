@@ -260,6 +260,8 @@ In a nutshell, the pattern above allows to execute multiple tasks concurrently a
 
 ## Resources
 
+The source code is in the repository <https://github.com/azat-co/nc-posts/tree/master/node-patterns-concurrency> and for more reading follow these articles:
+
 1. [Parallel vs Concurrent in Node.js](http://bytearcher.com/articles/parallel-vs-concurrent)
 1. [Essential Node.js patterns and snippets](http://blog.mixu.net/2011/02/02/essential-node-js-patterns-and-snippets)
 1. [Node.js Design Patterns book](http://amzn.to/21hXxTy)
