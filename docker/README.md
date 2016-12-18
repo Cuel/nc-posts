@@ -213,26 +213,16 @@ If you define an **ENTRYPOINT**, you can use a CMD as well to specify default pa
 
 **ENV** - sets the environment variable `{key}` to the value `{value}` using `{key}={value}`. Syntax example:
 
-	```
-	ENV myName="John Doe" myDog=Rex The Dog myCat=fluffy
-	```
+```
+ENV myName="John Doe" myDog=Rex The Dog myCat=fluffy
+```
+
 
 For more information about instructions you can include in the `Dockerfile`, go to Dockerfile Reference: <http://docs.docker.io/reference/builder>. For Dockerfile tips and best practices:
 <https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices>
 
 
-Then next example will run a static nginx site in a container.
-
-Follow along: 
-[https://github.com/rwheaton/docker-examples]
-
----
-
-* .dockerignore
-	- Excludes files/folders from the container build:
-[https://docs.docker.com/engine/reference/builder/#/dockerignore-file]
-
-Volumes can share code between host (your computer) and the container. In other words, a Docker volume is a wormhole between an ephemeral Docker container and the host. It's great for development or persistent data. The following command will mount a volume from a current working directory (pwd) on host. The files will be availabe in `/www/` in the container. The way to remember the options is left to right, i.e., host:contaner.
+Volumes can share code between host (your computer) and the container. In other words, a Docker volume is a wormhole between an ephemeral Docker container and the host. It's great for development or persistent data. The following command will mount a volume from a current working directory (pwd) on host. The files will be available in `/www/` in the container. The way to remember the options is left to right, i.e., `host:contaner`.
 
 ``` 
 $ docker run -v $(pwd)/:/www/ -it ubuntu
@@ -305,7 +295,41 @@ Now, the changes you make will be passed to container, the server will restart a
 
 ## Working with Multiple Containers: Node, MongoDB, Redis, Nginx
 
-
+```
+version: '2'
+services:
+ 
+  mongo:
+    image: mongo
+    command: mongod --smallfiles
+    networks:
+      - all
+ 
+  web:
+    image: node:argon
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    command: sh -c 'npm install; npm run seed; npm start'
+    ports:
+      - "3000:8080"
+    depends_on:
+      - mongo
+    # links:
+      # - mongo
+    networks:
+      - all
+    environment:
+      MONGODB_URI: "mongodb://mongo:27017/accounts"
+ 
+networks:
+  all:
+```
+  
+  
+```
+$ docker-compose up
+```
 
 ## Further Reading and Docker Resources
 
