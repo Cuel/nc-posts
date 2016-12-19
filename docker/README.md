@@ -52,7 +52,7 @@ Node.js is one of the fastest growing platforms. It's great for web applications
 * Installing Docker
 * Docker Basics
 * Creating Node images
-* Working with multiple containers: Node, MongoDB, Redis, Nginx
+* Working with multiple containers: Node and MongoDB
 
 ## Installing Docker
 
@@ -66,11 +66,24 @@ Once install is complete, test your Docker installation by running:
 $ docker run hello-world
 ```
 
-If you see a message like this:
+If you see a message like this most likely you didn't start Docker:
 
 ```
-Cannot connect to the Docker daemon. Is the docker daemon running on this host?
+Cannot connect to the Docker daemon. Is the docker daemon running on this host? 
 ```
+
+
+Start Docker. If you used macOS, you can utilize the GUI app. Otherwise, CLI. 
+
+This is how running Docker deamon looks on my macOS:
+
+![](docker-running.png)
+
+
+I can even configure how much memory it takes, whether it updates automatically or starts itself on the log in.
+
+![title](docker-conf.png)
+
 
 On the contrary, if you see a message like the one below, then deamon is running and you are ready to work with Docker!
 
@@ -85,22 +98,7 @@ Status: Downloaded newer image for hello-world:latest
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
  
-To generate this message, Docker took the following steps:
-1. The Docker client contacted the Docker daemon.
-2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
-4. The Docker daemon streamed that output to the Docker client, which sent it
-    to your terminal.
- 
-To try something more ambitious, you can run an Ubuntu container with:
-$ docker run -it ubuntu bash
- 
-Share images, automate workflows, and more with a free Docker Hub account:
-https://hub.docker.com
- 
-For more examples and ideas, visit:
-https://docs.docker.com/engine/userguide/
+...
 ```
 
 Next, we will download a lightweight version of Linux as an image. It's called Alpine. We will get this Alpine image from Docker Hub.
@@ -293,7 +291,7 @@ $ docker run -v ./:/usr/src/app -it {name}
  
 Now, the changes you make will be passed to container, the server will restart and you can develop in your host environment while running code in container. Best of both world! (It's great because the container environment will be *exactly* the same in production as the one you have now.) But apps don't function by themselves. You need some persistence and other services. 
 
-## Working with Multiple Containers: Node, MongoDB, Redis, Nginx
+## Working with Multiple Containers: Node, and MongoDB
 
 ```
 version: '2'
@@ -315,8 +313,6 @@ services:
       - "3000:8080"
     depends_on:
       - mongo
-    # links:
-      # - mongo
     networks:
       - all
     environment:
@@ -325,13 +321,28 @@ services:
 networks:
   all:
 ```
-  
-  
+
+Let inspect this ymp file line by line. We start with a list of services. Name of a service, i.e., `mongodb` will be available in other containers so we can connect to MongoDB with `mongodb://mongo:27017/accounts`. You don't have to pass this connection string in an environmental variable. I just did it to show that you can do it.
+
+The image, volumes, ports and other fields mimic the Dockerfile instructions. The key distinction is that we use `depends_on`. This will tell the `web` service to use the `mongo` service. 
+
+To run the Docker compose, simply execute this terminal command (assuming deamon is running):
+ 
 ```
 $ docker-compose up
 ```
 
+
+You can look at the full working example of a MERN (MongoDB, Express, React and Node) app at <https://github.com/azat-co/mern/blob/master/code>. Docker compose is a brilliant and easy way to startup multi-container environment. 
+
+## Wrap-up
+ 
+ Containers are great to getting your code safely in multiple environment with very little overhead. This allows you to minimize any discrepancies. The basic idea is that by developing in an environment identical to the production, you will eliminate any potential issues related to differences between dev and prod. Moreover, by getting encapsulation cheaper than with VMs, we can split our apps into more granular services. They can divided be not just into app, database, cache, web server, but even further. We can split web apps into containers by resources, e.g., endpoints for `/accounts` in one container, endpoints for `/users` in another, etc.... but this is a topic for another post.
+
 ## Further Reading and Docker Resources
+
+Learning never stops! Here's some reading on Docker along with resources. 
+
 
 * **Awesome Docker:** <https://github.com/veggiemonk/awesome-docker>
 * **Hello Docker Workshop:** 	<http://docker.atbaker.me>
