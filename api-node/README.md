@@ -224,7 +224,7 @@ To sum up, for beautiful function, you would typically make the asynchronous, ha
 
 ## Beautiful Classes in Node: Diving into OOP with Classes
 
-I'm not a huge fan of ES6/ES2015 classes. I use function factories (a.k.a. functional inheritance pattern) as much as I can. However, I expect more people would start coding in Node who came from front-end or Java background. For them, let's take a look at the OOP way to inherit in Node:
+I'm not a huge fan of ES6/ES2015 [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes). I use function factories (a.k.a. functional inheritance pattern) as much as I can. However, I expect more people would start coding in Node who came from front-end or Java background. For them, let's take a look at the OOP way to inherit in Node:
 
 ```js
 class Auto {
